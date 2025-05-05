@@ -29,6 +29,7 @@ type GetProductCandlesRequest struct {
 	ProductId   string `json:"product_id"`
 	Start       string `json:"start"`
 	End         string `json:"end"`
+	Limit       string `json:"limit,omitempty"`
 	Granularity string `json:"granularity"`
 }
 
@@ -50,6 +51,8 @@ func (s productsServiceImpl) GetProductCandles(
 	queryParams = core.AppendHttpQueryParam(queryParams, "product_id", request.ProductId)
 	queryParams = core.AppendHttpQueryParam(queryParams, "granularity", request.Granularity)
 	queryParams = core.AppendHttpQueryParam(queryParams, "start", request.Start)
+	queryParams = core.AppendHttpQueryParam(queryParams, "end", request.End)
+	queryParams = core.AppendHttpQueryParam(queryParams, "limit", request.Limit)
 
 	if err := core.HttpGet(
 		ctx,

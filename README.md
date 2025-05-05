@@ -23,13 +23,13 @@ enabled. Ensure that Advanced Trade API credentials are stored in a secure manne
 
 ```
 credentials := &credentials.Credentials{}
-if err := json.Unmarshal([]byte(os.Getenv("ADV_CREDENTIALS")), credentials); err != nil {
-    return nil, fmt.Errorf("unable to deserialize advanced trade credentials JSON: %w", err)
+if err := json.Unmarshal([]byte(os.Getenv("ADVANCED_CREDENTIALS")), credentials); err != nil {
+    log.Fatalf("unable to deserialize advanced trade credentials JSON: %v", err)
 }
 
 httpClient, err := client.DefaultHttpClient()
 if err != nil {
-    panic(fmt.Sprintf("unable to load default http client: %v", err))
+    log.Fatalf("unable to load default http client: %v", err)
 }
 
 restClient := client.NewRestClient(credentials, httpClient)
@@ -49,12 +49,20 @@ Coinbase Advanced Trade API credentials can be created in the [CDP web portal](h
 Once the client is initialized, initialize a service to make the desired call. For example, to [list portfolios](https://github.com/coinbase-samples/advanced-trade-sdk-go/blob/main/list_portfolios.go),
 create the service, pass in the request object, check for an error, and if nil, process the response.
 
-
 ```
-service := portfolios.NewPortfoliosService(restClient)
+portfoliosService := portfolios.NewPortfoliosService(restClient)
 
+resp, err := portfoliosService.ListPortfolios(context.Background(), &portfolios.ListPortfoliosRequest{})
+if err != nil {
+    log.Fatalf("error listing portfolios: %v", err)
+}
 
-response, err := service.ListPortfolios(ctx, &portfolios.ListPortfoliosRequest{})
+jsonResponse, err := json.MarshalIndent(resp, "", "  ")
+if err != nil {
+    panic(fmt.Sprintf("error marshaling response to JSON: %v", err))
+}
+
+fmt.Println(string(jsonResponse))
 ```
 
 ## Build
