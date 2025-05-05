@@ -29,7 +29,7 @@ type GetPublicProductCandlesRequest struct {
 	ProductId   string `json:"product_id"`
 	Start       string `json:"start"`
 	End         string `json:"end"`
-	Limit       string `json:"limit"`
+	Limit       string `json:"limit,omitempty"`
 	Granularity string `json:"granularity"`
 }
 
