@@ -31,7 +31,7 @@ type GetTransactionsSummaryRequest struct {
 }
 
 type GetTransactionsSummaryResponse struct {
-	TotalVolume             int                            `json:"total_volume"`
+	TotalVolume             float64                        `json:"total_volume"`
 	TotalFees               float64                        `json:"total_fees"`
 	FeeTier                 model.FeeTier                  `json:"fee_tier"`
 	MarginRate              model.Rate                     `json:"margin_rate"`
