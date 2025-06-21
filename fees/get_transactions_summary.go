@@ -36,9 +36,8 @@ type GetTransactionsSummaryResponse struct {
 	FeeTier                 model.FeeTier                  `json:"fee_tier"`
 	MarginRate              model.Rate                     `json:"margin_rate"`
 	GoodsAndServicesTax     model.Gst                      `json:"goods_and_services_tax"`
-	AdvancedTradeOnlyVolume int                            `json:"advanced_trade_only_volume"`
-	AdvancedTradeOnlyFees   float64                        `json:"advanced_trade_only_fees"`
-	CoinbaseProVolume       int                            `json:"coinbase_pro_volume"`
+	AdvancedTradeOnlyVolume float64                        `json:"advanced_trade_only_volume"`
+	CoinbaseProVolume       float64                        `json:"coinbase_pro_volume"`
 	CoinbaseProFees         float64                        `json:"coinbase_pro_fees"`
 	Request                 *GetTransactionsSummaryRequest `json:"request"`
 }
